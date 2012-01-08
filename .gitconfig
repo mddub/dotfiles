@@ -1,0 +1,4 @@
+[color]
+	ui = auto
+[alias]
+	lol = log --pretty=oneline --abbrev-commit --graph --decorate
