@@ -42,6 +42,9 @@ set statusline+=[%l,%v][%p%%]
 " Maintain more text around the cursor
 set scrolloff=3
 
+" Show line numbers
+set number
+
 " Backspace config
 set backspace=eol,start,indent
 
@@ -58,6 +61,9 @@ set history=1000
 " Case-smart searching (case-sensitive only if capital letter in search)
 set ignorecase
 set smartcase
+
+" Tab completion
+set wildmode=longest,list
 
 " Visual bell instead of beep
 set visualbell
