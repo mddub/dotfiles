@@ -8,7 +8,7 @@ export PYTHONPATH=$PYTHONPATH:~/local/py-lib:~/local/bin
 export NODE_PATH=$NODE_PATH:~/local/lib/jsctags/
 
 # Aliases
-alias tmux-env='eval `~/local/bin/tmux-env`'
+alias te='eval `~/local/bin/tmux-env`'
 [ $(hostname) != "dev20" ] && alias d='ssh -A mwilson@dev20'
 # Make ls output better
 if [ ${OSTYPE//[0-9.]/} == "darwin" ]; then

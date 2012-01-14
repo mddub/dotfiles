@@ -1,6 +1,11 @@
 *
-!.vim
-!.vim/*
-.vim/.*
-.vim/backup/*
+
+!/.vim
+!/.vim/*
+!/.vim/*/
+!/.vim/**/*
+
+/.vim/.*
+/.vim/**/.*
+/.vim/backup/*
 .vim/tmp/*

@@ -21,13 +21,12 @@ set shiftwidth=4
 
 " highlight trailing whitespace and non-tab indents
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /^\t*\zs \+/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd BufWinEnter *.* match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter *.* match ExtraWhitespace /^\t*\zs \+/
+autocmd InsertEnter *.* match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd BufWinLeave * call clearmatches()
 
 " Color scheme and font
-set t_Co=256
 colorscheme xoria256
 set guifont=Monaco:h12
 
@@ -45,8 +44,9 @@ set scrolloff=3
 " Show line numbers
 set number
 
-" Backspace config
+" More intelligent backspace and left/right movement
 set backspace=eol,start,indent
+set whichwrap=b,s,h,l,<,>,[,]
 
 " Hidden buffer support
 set hidden
@@ -64,6 +64,7 @@ set smartcase
 
 " Tab completion
 set wildmode=longest,list
+set wildignore=*.pyc
 
 " Visual bell instead of beep
 set visualbell
@@ -80,7 +81,9 @@ set splitright
 " Tags - recursively check parent directories for tags file
 set tags+=./.tags,.tags,../.tags,../../.tags
 
-" ---------- plugin settings ---------
+" ---------- plugins ---------
+
+call pathogen#infect()
 
 " Syntastic
 let g:syntastic_auto_loc_list=1
@@ -95,6 +98,9 @@ if(match(hostname(), 'dev20') >= 0)
 	let ropevim_vim_completion=1 "Replace vim's complete function with ropevim
 	let ropevim_extended_complete=1
 endif
+
+" Command-T
+let g:CommandTMaxFiles=999999
 
 " ---------- mappings ---------
 
@@ -126,7 +132,8 @@ map <F9> :!/usr/bin/ctags -L <(find . -name '*.py') --fields=+iaS --python-kinds
 map <Leader>v :tabe ~/.vimrc<CR>
 map <Leader>e :tabe 
 map <Leader>E :e <C-R>=expand('%:p:h') . '/'<CR>
-map <Leader>s :tab split<CR>	" Open current buffer in new tab
+" open current buffer in new tab
+map <Leader>s :tab split<CR>
 map <Leader>n :tabnew<CR>
 map <Leader>Q :tabc<CR>
 map <Leader>m :tabm
@@ -138,14 +145,19 @@ map <Leader>c :copen<CR>
 map <Leader>C :cclose<CR>
 map <Leader>z :cp<CR>
 map <Leader>x :cn<CR>
-map <Leader>f :tab split<CR>:Gdiff canon/master<CR>	" git diff in new tab
+" git diff in new tab
+map <Leader>f :tab split<CR>:Gdiff canon/master<CR>
 map <Leader>g :tab split<CR>:Ggrep 
 map <Leader>i Oimport pdb; pdb.set_trace()<ESC>
+" these are already set by Command-T, but let's be explicit
+map <Leader>t :CommandT<CR>
+map <Leader>b :CommandTBuffer<CR>
 
 " ---------- yelp stuff ---------
 
 if(match(hostname(), 'dev20') >= 0)
-	map <Leader>t :!cd ~/pg/yelp-main/templates && make<CR>
+	map <Leader>r :!cd ~/pg/yelp-main/templates && make && cd ~/pg/yelp-main/mobile_templates && make -f ../templates/Makefile<CR>
+	set wildignore+=build/**,templates/*.py*,mobile_templates/*.py*,biz_templates/*.py*,admin_templates/*.py*,lite_templates/*.py*
 	autocmd BufEnter *.css.tmpl setlocal filetype=css
 	autocmd BufEnter *.js.tmpl setlocal filetype=javascript
 endif
