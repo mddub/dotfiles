@@ -1,6 +1,29 @@
-let mapleader = ","
-
 set nocompatible
+
+" ---------- plugins ---------
+
+call pathogen#infect()
+
+" Syntastic
+let g:syntastic_auto_loc_list=1
+
+" Tagbar
+let g:tagbar_sort = 0
+let g:tagbar_compact = 1
+let g:tagbar_autofocus = 1
+
+" Ropevim
+if(match(hostname(), 'dev20') >= 0)
+	let ropevim_vim_completion=1 "Replace vim's complete function with ropevim
+	let ropevim_extended_complete=1
+endif
+
+" Command-T
+let g:CommandTMaxFiles=999999
+
+" ---------- settings ---------
+
+let mapleader = ","
 set mouse=a
 
 " Filetype highlighting
@@ -80,27 +103,6 @@ set splitright
 
 " Tags - recursively check parent directories for tags file
 set tags+=./.tags,.tags,../.tags,../../.tags
-
-" ---------- plugins ---------
-
-call pathogen#infect()
-
-" Syntastic
-let g:syntastic_auto_loc_list=1
-
-" Tagbar
-let g:tagbar_sort = 0
-let g:tagbar_compact = 1
-let g:tagbar_autofocus = 1
-
-" Ropevim
-if(match(hostname(), 'dev20') >= 0)
-	let ropevim_vim_completion=1 "Replace vim's complete function with ropevim
-	let ropevim_extended_complete=1
-endif
-
-" Command-T
-let g:CommandTMaxFiles=999999
 
 " ---------- mappings ---------
 
