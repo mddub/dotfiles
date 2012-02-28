@@ -4,11 +4,13 @@ source ~/.git-completion.bash
 
 # Paths
 export PATH=$PATH:~/local/bin:~/pg/loc/aws/bin
-export PYTHONPATH=$PYTHONPATH:~/local/py-lib:~/local/bin
+export PYTHONPATH=~/local/py-lib:~/local/bin
 export NODE_PATH=$NODE_PATH:~/local/lib/jsctags/
 
 # Aliases
 alias te='eval `~/local/bin/tmux-env`'
+alias unpush='eval "git push origin :"`git-branch-name`'
+alias modifieds='git status -s | grep "^ M " | sed "s/ M //g"'
 [ $(hostname) != "dev20" ] && alias d='ssh -A mwilson@dev20'
 # Make ls output better
 if [ ${OSTYPE//[0-9.]/} == "darwin" ]; then

@@ -42,11 +42,9 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
-" highlight trailing whitespace and non-tab indents
+" highlight trailing whitespace
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd BufWinEnter *.* match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter *.* match ExtraWhitespace /^\t*\zs \+/
-autocmd InsertEnter *.* match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd BufWinLeave * call clearmatches()
 
 " Color scheme and font
@@ -85,6 +83,9 @@ set history=1000
 set ignorecase
 set smartcase
 
+" Incremental search
+set incsearch
+
 " Tab completion
 set wildmode=longest,list
 set wildignore=*.pyc
@@ -105,10 +106,6 @@ set splitright
 set tags+=./.tags,.tags,../.tags,../../.tags
 
 " ---------- mappings ---------
-
-" jj = escape
-inoremap jj <ESC>
-inoremap JJ <ESC>
 
 " Typos and things I don't want to do
 nmap Q <ESC>
@@ -150,7 +147,10 @@ map <Leader>x :cn<CR>
 " git diff in new tab
 map <Leader>f :tab split<CR>:Gdiff canon/master<CR>
 map <Leader>g :tab split<CR>:Ggrep 
+" commit log for current file
+map <Leader>o :Glog -- %<CR>:copen<CR>
 map <Leader>i Oimport pdb; pdb.set_trace()<ESC>
+map <Leader>I Oimport pudb; pudb.set_trace()<ESC>
 " these are already set by Command-T, but let's be explicit
 map <Leader>t :CommandT<CR>
 map <Leader>b :CommandTBuffer<CR>
