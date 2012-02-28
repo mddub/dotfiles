@@ -4,12 +4,20 @@ source ~/.git-completion.bash
 
 # Paths
 export PATH=$PATH:~/local/bin:~/pg/loc/aws/bin
-export PYTHONPATH=$PYTHONPATH:~/local/py-lib:~/local/bin
-export NODE_PATH=$NODE_PATH:~/local/lib/jsctags/
+export PYTHONPATH=~/local/py-lib:~/local/bin
 
 # Aliases
 alias te='eval `~/local/bin/tmux-env`'
-[ $(hostname) != "dev20" ] && alias d='ssh -A mwilson@dev20'
+
+if [ $(hostname) != "dev20" ]; then
+	alias d='~/local/bin/growl_irc.sh; ssh -A mwilson@dev20'
+fi
+
+if [ $(hostname) == "Marks-MacBook-Pro.local" ]; then
+	alias vim='mvim -v'
+	alias mysql='/Applications/MAMP/Library/bin/mysql -uroot -proot'
+fi
+
 # Make ls output better
 if [ ${OSTYPE//[0-9.]/} == "darwin" ]; then
 	alias ls='ls -FGh'
@@ -18,7 +26,7 @@ else
 fi
 
 # Make prompt a colorful display of pwd and git branch
-export PS1='\[\e[1;34m\]\u\[\e[0;39m\]@\[\e[1;32m\]\h\[\e[0;39m\]:\[\e[1;33m\]\w\[\e[0;39m\]$(__git_ps1 " \[\e[1;36m\](%s)\[\e[0;39m\] ")\$ '
+export PS1='[ \[\e[1;34m\]\u\[\e[0;39m\]@\[\e[1;32m\]\h\[\e[0;39m\]:\[\e[1;33m\]\w\[\e[0;39m\] ]$(__git_ps1 " \[\e[1;36m\](%s)\[\e[0;39m\] ")\$ '
 
 # Start in working directory
 if [ -d ~/pg/yelp-main ]; then
