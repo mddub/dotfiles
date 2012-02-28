@@ -13,7 +13,7 @@ let g:tagbar_compact = 1
 let g:tagbar_autofocus = 1
 
 " Ropevim
-if(match(hostname(), 'dev20') >= 0)
+if(filereadable(expand('~/.vim/plugin/ropevim.vim')))
 	let ropevim_vim_completion=1 "Replace vim's complete function with ropevim
 	let ropevim_extended_complete=1
 endif
@@ -42,7 +42,13 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
-" highlight trailing whitespace
+" Except HTML - 2 spaces
+autocmd BufWinEnter *.html setlocal tabstop=2
+autocmd BufWinEnter *.html setlocal expandtab
+autocmd BufWinEnter *.html setlocal shiftwidth=2
+autocmd BufWinEnter *.html setlocal expandtab
+
+" highlight trailing whitespace and non-tab indents
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd BufWinEnter *.* match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
@@ -104,6 +110,9 @@ set splitright
 
 " Tags - recursively check parent directories for tags file
 set tags+=./.tags,.tags,../.tags,../../.tags
+
+" Filetypes
+autocmd BufEnter *.mako setlocal filetype=html
 
 " ---------- mappings ---------
 
