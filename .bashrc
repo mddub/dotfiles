@@ -8,9 +8,15 @@ export PYTHONPATH=~/local/py-lib:~/local/bin
 
 # Aliases
 alias te='eval `~/local/bin/tmux-env`'
+alias unpush='git push origin :'`git-branch-name`
+alias modifieds='git status -s | grep "^ M " | sed "s/^ M //g"'
 
 if [ $(hostname) != "dev20" ]; then
 	alias d='~/local/bin/growl_irc.sh; ssh -A mwilson@dev20'
+fi
+
+if [ $(hostname) == "dev20" ]; then
+	alias mp='. ~/local/mp/bin/activate'
 fi
 
 if [ $(hostname) == "Marks-MacBook-Pro.local" ]; then
