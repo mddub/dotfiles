@@ -1,4 +1,5 @@
 [color]
 	ui = auto
 [alias]
-	lol = log --pretty=format:'%C(cyan)%h %C(yellow)%an %Creset%s' --graph --decorate --abbrev-commit
+	lol = log --pretty=format:'%C(cyan)%h %C(yellow)%an%C(green)%d %Creset%s' --decorate --abbrev-commit --graph
+	ll = log --pretty=format:'%C(cyan)%h %C(yellow)%an%C(green)%d %Creset%s' --decorate --abbrev-commit
